@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investors Program Limited</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        :root {
+            --primary: #0c0e27;
+            --secondary: #1a1f4b;
+            --accent: #ff6b35;
+            --accent-light: #ff8e53;
+            --text: #ffffff;
+            --text-secondary: #b8b8b8;
+        }
+        
+        body {
+            background: linear-gradient(-45deg, #0c0e27, #1a1f4b, #2d1946, #1a1f4b);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            perspective: 1000px;
+        }
+        
+        .card {
+            background: rgba(12, 14, 39, 0.85);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, rgba(26, 31, 75, 0.9), rgba(12, 14, 39, 0.9));
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transform-style: preserve-3d;
+            animation: logo-rotate 20s linear infinite;
+        }
+        
+        @keyframes logo-rotate {
+            0% { transform: rotateY(0); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .logo-icon {
+            font-size: 50px;
+            color: var(--accent);
+            margin-right: 20px;
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.7);
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 10px;
+        }
+        
+        .auth-tab {
+            padding: 12px 30px;
+            background: rgba(255, 107, 53, 0.1);
+            border: none;
+            color: var(--text);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px 8px 0 0;
+            margin: 0 5px;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .auth-tab.active {
+            background: rgba(255, 107, 53, 0.3);
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent-light);
+        }
+        
+        .auth-tab:hover:not(.active) {
+            background: rgba(255, 107, 53, 0.2);
+        }
+        
+        .content {
+            padding: 30px 50px 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                padding: 20px 30px 30px;
+            }
+        }
+        
+        .notice-box {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 107, 53, 0.05));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notice-box:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+        
+        .notice-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+        
+        .notice-icon {
+            font-size: 70px;
+            color: var(--accent);
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.7);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .notice-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .notice-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .form-container {
+            background: rgba(26, 31, 75, 0.5);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container:hover {
+            transform: translateY(-10px) rotateX(-5deg);
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 107, 53, 0.05), transparent);
+            z-index: -1;
+        }
+        
+        .form-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 1px;
+        }
+        
+        .input-container {
+            position: relative;
+        }
+        
+        input {
+            width: 100%;
+            padding: 18px 20px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 16px;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.4);
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .award-notice {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 16px;
+            color: var(--accent);
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 50%;
+            animation: float-element 15s infinite linear;
+        }
+        
+        @keyframes float-element {
+            0% { transform: translateY(0) rotate(0); }
+            100% { transform: translateY(-1000px) rotate(720deg); }
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(12, 14, 39, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            animation: particle-float 20s infinite linear;
+        }
+        
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) translateX(0); }
+            100% { transform: translateY(-100px) translateX(100px); }
+        }
+        
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.2) 0%, transparent 70%);
+            filter: blur(30px);
+            animation: glow-move 10s infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes glow-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+        
+        .forgot-password a {
+            color: var(--accent-light);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        .user-dashboard {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .user-dashboard.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .dashboard-icon {
+            font-size: 80px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .dashboard-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .dashboard-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .logout-btn {
+            padding: 12px 30px;
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 107, 53, 0.4);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="glow" style="top: 10%; left: 10%;"></div>
+    <div class="glow" style="bottom: 10%; right: 10%; animation-delay: -5s;"></div>
+    
+    <div class="container">
+        <div class="card">
+            <div class="floating-elements" id="floatingElements"></div>
+            
+            <div class="header">
+                <div class="logo">
+                    <i class="fas fa-chart-line logo-icon"></i>
+                    <div class="logo-text">INVESTORS PROGRAM</div>
+                </div>
+                <div class="tagline">Premium Investment Solutions • Advanced Financial Technology</div>
+                
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="register">New Registration</button>
+                    <button class="auth-tab" data-tab="login">Existing Client Login</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="notice-box">
+                    <i class="fas fa-exclamation-triangle notice-icon"></i>
+                    <h2 class="notice-title">SERVICE NOTICE</h2>
+                    <p class="notice-text">All Users We Are Sorry, At The Moment No Withdrawals And Deposits Are Allowed</p>
+                    <p class="notice-text">Our platform is currently undergoing essential upgrades to enhance security and performance.</p>
+                    <p class="notice-text">We appreciate your patience and understanding during this maintenance period.</p>
+                </div>
+                
+                <div class="form-container">
+                    <!-- Registration Form -->
+                    <div class="auth-form active" id="register-form">
+                        <h3 class="form-title">REGISTER FOR UPDATES</h3>
+                        <form id="userForm">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <div class="input-container">
+                                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                                    <i class="fas fa-user input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phoneNumber">Phone Number</label>
+                                <div class="input-container">
+                                    <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required>
+                                    <i class="fas fa-phone input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <div class="input-container">
+                                    <input type="text" id="username" placeholder="Choose a username" required>
+                                    <i class="fas fa-at input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="input-container">
+                                    <input type="password" id="password" placeholder="Create a password" required>
+                                    <i class="fas fa-lock input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i> Register & Get Notified
+                            </button>
+                        </form>
+                        
+                        <p class="award-notice">You will be awarded once services resume. But at the moment no transactions are allowed.</p>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <div class="auth-form" id="login-form">
+                        <h3 class="form-title">CLIENT LOGIN</h3>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="loginUsername">Username</label>
+                                <div class="input-container">
+                                    <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                                    <i class="fas fa-user input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="loginPassword">Password</label>
+                                <div class="input-container">
+                                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                                    <i class="fas fa-lock input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="forgot-password">
+                                <a href="#" id="forgotPassword">Forgot Password?</a>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-sign-in-alt"></i> Login to Account
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- User Dashboard -->
+                    <div class="user-dashboard" id="user-dashboard">
+                        <i class="fas fa-user-shield dashboard-icon"></i>
+                        <h3 class="dashboard-title">ACCOUNT OVERVIEW</h3>
+                        
+                        <div class="dashboard-info">
+                            <div class="info-item">
+                                <span>Account Status:</span>
+                                <span style="color: var(--accent);">Active</span>
+                            </div>
+                            <div class="info-item">
+                                <span>Member Since:</span>
+                                <span>January 15, 2023</span>
+                            </div>
+                            <div class="info-item">
+                                <span>Last Login:</span>
+                                <span>Today, 14:32</span>
+                            </div>
+                            <div class="info-item">
+                                <span>Account Tier:</span>
+                                <span style="color: var(--accent);">Premium Investor</span>
+                            </div>
+                        </div>
+                        
+                        <div class="notice-text">
+                            <p>Please note: Withdrawals and deposits are temporarily disabled during system maintenance.</p>
+                            <p>We will notify you as soon as services are restored.</p>
+                        </div>
+                        
+                        <button class="logout-btn" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>&copy; 2023 Investors Program Limited. All Rights Reserved.</p>
+                <p>Contact: support@investorsprogram.com | +1 (800) 123-4567</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating elements
+        const floatingContainer = document.getElementById('floatingElements');
+        for (let i = 0; i < 15; i++) {
+            const element = document.createElement('div');
+            element.classList.add('floating-element');
+            const size = Math.random() * 60 + 20;
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.animationDelay = `${Math.random() * 15}s`;
+            element.style.background = `rgba(255, 107, 53, ${Math.random() * 0.1})`;
+            floatingContainer.appendChild(element);
+        }
+        
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 5 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 20}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Tab switching functionality
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const authForms = document.querySelectorAll('.auth-form');
+        
+        authTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                authTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show corresponding form
+                authForms.forEach(form => {
+                    form.classList.remove('active');
+                    if (form.id === `${targetTab}-form`) {
+                        form.classList.add('active');
+                    }
+                });
+                
+                // Hide dashboard if showing
+                document.getElementById('user-dashboard').classList.remove('active');
+            });
+        });
+        
+        // Registration form submission
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if(fullName && phoneNumber && username && password) {
+                // Create a success animation
+                const button = this.querySelector('.submit-btn');
+                button.innerHTML = '<i class="fas fa-check"></i> Registration Successful!';
+                button.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+                
+                setTimeout(() => {
+                    alert(`Thank you ${fullName}!\n\nYour registration has been successfully recorded.\n\nUsername: ${username}\nPhone: ${phoneNumber}\n\nWe will notify you when our services resume and your award is ready.`);
+                    
+                    // Reset form and button
+                    this.reset();
+                    button.innerHTML = '<i class="fas fa-paper-plane"></i> Register & Get Notified';
+                    button.style.background = 'linear-gradient(135deg, var(--accent), var(--accent-light))';
+                }, 1500);
+            } else {
+                alert('Please fill in all fields before submitting.');
+            }
+        });
+        
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if(username && password) {
+                // In a real application, you would verify credentials with a server
+                // For this demo, we'll simulate a successful login
+                const button = this.querySelector('.submit-btn');
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+                
+                setTimeout(() => {
+                    // Show user dashboard
+                    document.getElementById('login-form').classList.remove('active');
+                    document.getElementById('user-dashboard').classList.add('active');
+                    
+                    // Reset login form
+                    this.reset();
+                    button.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Account';
+                }, 2000);
+            } else {
+                alert('Please enter both username and password.');
+            }
+        });
+        
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('user-dashboard').classList.remove('active');
+            document.getElementById('login-form').classList.add('active');
+            
+            // Switch to login tab
+            authTabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('[data-tab="login"]').classList.add('active');
+        });
+        
+        // Forgot password functionality
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Password reset instructions have been sent to your registered email address.');
+        });
+        
+        // Add input focus effects
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
